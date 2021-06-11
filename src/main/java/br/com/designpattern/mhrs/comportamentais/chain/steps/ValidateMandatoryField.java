@@ -1,0 +1,18 @@
+package br.com.designpattern.mhrs.comportamentais.chain.steps;
+
+import br.com.designpattern.mhrs.comportamentais.chain.services.ProcessContext;
+
+public class ValidateMandatoryField extends ProcessStep {
+
+	public ValidateMandatoryField(Object... args) {
+		super(args);
+	}
+
+	@Override
+	public ProcessContext execute(ProcessContext context) throws Exception {
+		Object field = context.get((String) args[0]);
+		if(field == null) throw new Exception(String.format("%s is empty", args[0]));
+		return next(context, true);
+	}
+
+}
